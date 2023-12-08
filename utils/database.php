@@ -1,0 +1,12 @@
+<?php
+    // Session login
+    if(!isset($_SESSION['login']))
+        $_SESSION['login'] = "_";
+
+    // Connexion à la BD
+    $connexion = new PDO('mysql:host=localhost;dbname=chat', 'mamitiana', 'hqcker(_-;:');
+    
+    if(!$connexion){
+        die('Connection failed : ' . $connexion->connect_error);
+    }
+?>

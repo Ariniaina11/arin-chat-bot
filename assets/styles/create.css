@@ -1,0 +1,136 @@
+body{
+    background-color: white;
+    width: 100%;
+}
+
+.box{
+    width: 40%;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    /* background-color: rgb(247, 244, 244); */
+    border-radius: 10px;
+    box-shadow: 0 30px 70px 0px rgba(0,0,0,0.2);
+    padding: 1%;
+    margin-top: 7%;
+}
+
+h1{
+    color: #04b992;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+input{
+    display: block;
+    margin-top: 15px;
+    padding: 18px 15px;
+    text-align: center;
+}
+
+.credentials{
+    outline: none;
+    color: rgb(92, 91, 91);
+    width: 60%;
+    border: 1px solid rgb(226, 226, 226);
+    border-radius: 10px;
+    margin-left: 15%;
+    background-color: rgb(236, 237, 238);
+    display: block;
+    margin: 0 auto;
+}
+
+#creation{
+    color: #04b992;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border: 1px solid #04b992;
+    border-radius: 5px;
+    background-color: #04b992;
+    color: whitesmoke;
+    letter-spacing: 2px;
+    padding: 15px 15px;
+    width: 329px;
+    margin-left: 15%;
+    margin-bottom: 6%;
+    width: 66.5%;
+    margin: 0 auto;
+}
+
+#creation:hover{
+    background-color: #30c4a4;
+    transition: .2s;
+}
+
+/* POPUP */
+#popup {
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 100px;
+    background-color: rgb(215, 214, 218);
+    border-radius: 10px;
+    box-shadow: 0 10px 50px 0px rgba(0,0,0,0.2);
+    text-align: center;
+    padding: 10px;
+    padding-top: 1%;
+    z-index: 1000;
+    display: none;
+}
+
+#popup h1{
+    font-size: 20px;
+    color: #585858;
+}
+
+#popup button{
+    font-size: 18px;
+    padding: 5px 15px;
+    cursor: pointer;
+    border: 0;
+    color: white;
+    border-radius: 5px;
+}
+
+#ok-btn{
+    background-color: rgb(219, 56, 170);
+}
+
+#ok-btn:hover{
+    transition: .2s;
+    background-color: rgb(221, 73, 177);
+}
+
+#ok-success-btn{
+    background-color: #04b992;
+}
+
+#ok-success-btn:hover{
+    transition: .2s;
+    background-color: #1fbd9b
+}
+
+.a-login{
+    text-decoration: none;
+    color: #04b992;
+}
+
+.a-login:hover{
+    text-decoration: underline;
+}
+
+/********** SCREEN **********/
+
+@media (max-width: 600px) {
+    .box{ width: 80%;}
+}
+
+@media (min-width: 600px) and (max-width: 700px) {
+    .box{ width: 70%;}
+}
+
+@media (min-width: 700px) and (max-width: 900px) {
+    .box{ width: 55%;}
+}
