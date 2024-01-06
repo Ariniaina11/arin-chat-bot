@@ -19,6 +19,7 @@ $(document).ready(function(){
             type : 'POST',
             data : data,
             success : function(result){
+                console.log(result);
                 switch (result) {
                     case 'success':
                         openPopup("Account created successfully !", true);
@@ -29,15 +30,18 @@ $(document).ready(function(){
                     case 'conf_pass_err':
                         openPopup('Password doesn\'t match !');
                         break;
+                    case 'empty':
+                        openPopup('Sorry ! You can\'t use this pseudo.');
+                        break;
                 
                     default:
+                        openPopup('Sorry ! You can\'t use this pseudo.');
                         break;
                 }
             },
             error : function(result) {
                 alert('Error ' + result.message);
             }
-
         });
     });
 

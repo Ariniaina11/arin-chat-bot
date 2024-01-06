@@ -4,7 +4,7 @@
         $_SESSION['login'] = "_";
 
     // Connexion à la BD
-    $connexion = new PDO('mysql:host=localhost;dbname=chat', 'mamitiana', 'hqcker(_-;:');
+    $connexion = new PDO('mysql:host=localhost;dbname=chat', 'root', '');
     
     if(!$connexion){
         die('Connection failed : ' . $connexion->connect_error);

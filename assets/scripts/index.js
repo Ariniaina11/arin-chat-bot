@@ -1,5 +1,6 @@
 $(document).ready(function(){
     let msg = $('#msg');
+    let vocal_hidden = $('#vocalHidden')
     let send_btn = $('#send-btn');
     let conversation = $('#conversation')
     let loading = $('.loading')
@@ -34,7 +35,6 @@ $(document).ready(function(){
                     value = '<div class="talk left">' +
                                 '<img src="assets/images/arin-bot.png">' +
                                 '<p>' + result + '</p>' +
-                                '<button type="button" class="listen">LISTEN</button>' +
                             '</div>'
 
                     conversation.append(value); // Ajouter la réponse sur la conversation
@@ -42,13 +42,9 @@ $(document).ready(function(){
 
                     scrollDown();
 
-                    // speak(result);
-
-                    // 
-                    $('.listen').on('click', function(){
-                        let p = this.previousElementSibling;
-                        speak(p.textContent)
-                    })
+                    if(vocal_hidden.val() == '1'){
+                        speak(result);
+                    }
 
                     responseReceived();
                 }
@@ -85,6 +81,7 @@ $(document).ready(function(){
         send_btn.prop('disabled', false);
         msg.prop('disabled', false);
         loading.hide();
+        vocal_hidden.val('0');
     }
 
     // Clique sur "Entrée"
@@ -97,14 +94,16 @@ $(document).ready(function(){
 
     // Parler
     function speak(text) {
-        const array = divideText(text)
+        // const array = divideText(text)
 
-        array.forEach(element => {
-            let speech = new SpeechSynthesisUtterance(element);
-            speechSynthesis.speak(speech);
-        });
+        // array.forEach(element => {
+        //     let speech = new SpeechSynthesisUtterance(element);
+        //     speechSynthesis.speak(speech);
+        // });
 
-        console.log(array)
+        // console.log(array)
+        let speech = new SpeechSynthesisUtterance(text);
+        speechSynthesis.speak(speech);
     }
 
     // Diviser le texte

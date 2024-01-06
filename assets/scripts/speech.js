@@ -1,5 +1,6 @@
 $(document).ready(function(){
     let inputMsg = $("#msg")
+    let vocal_hidden = $('#vocalHidden')
     let vocal_btn = $('#vocal-btn')
     let send_btn = $('#send-btn');
     let loading = $('.loading')
@@ -94,6 +95,8 @@ $(document).ready(function(){
 
     // Clique sur vocal
     vocal_btn.on('click', function () {
+        vocal_hidden.val('1');
+
         if (!recording) {
             waittingResponse();
             speechToText();

@@ -17,10 +17,10 @@ $(document).ready(function(){
             data : data,
             success : function(result){
                 if(result == "success"){
-                    window.location = "/arin-chat/"
+                    window.location = "/arin-chat-bot/"
                     // alert('Success !');
                 }
-                else if(result == "failed"){
+                else{
                     // alert('Authentification failed !');
                     openPopup('Authentification failed !');
                 }

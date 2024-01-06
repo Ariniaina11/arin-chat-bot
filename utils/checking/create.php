@@ -23,14 +23,20 @@
             echo 'conf_pass_err';
         } 
         else {
-            $user = new user($pseudo, $pass);
-            insertData($user, $connexion);
+            $withoutSpace = trim($pseudo);
 
-            echo "success";
+            if(strlen($withoutSpace) == 0){
+                echo 'empty';
+            }
+            else{
+                $user = new user($pseudo, $pass);
+                insertData($user, $connexion);
+    
+                echo "success";
+            }
         }
 
 
-        // header('location: ../../login.php');
     }
     else{
         header('location: ../../create.php');
@@ -60,11 +66,11 @@
     // Insérer dans la BD
     function insertData($user, $connexion){
         // Préparer la requête
-        $stmt = $connexion->prepare('INSERT INTO users (pseudo, pass) VALUES (?, ?)');
+        $stmt = $connexion->prepare('INSERT INTO users (pseudo, pass) VALUES (:pseudo, :pass)');
 
         // Binding 
-        $stmt->bindParam(1, $user->getPseudo());
-        $stmt->bindParam(2, $user->getPassword());
+        $stmt->bindParam('pseudo', $user->getPseudo());
+        $stmt->bindParam('pass', $user->getPassword());
 
         // Exécuter la requête
         $stmt->execute();

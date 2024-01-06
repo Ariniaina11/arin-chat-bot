@@ -74,7 +74,7 @@
             <?php else: ?>
                 <div class="talk right" style="justify-content: flex-end;">
                     <p><?= normalize($msg['content'], 50) ?></p>
-                    <img src="assets/images/avatar2.jpg">
+                    <img src="assets/images/user.png">
                 </div>
             <?php endif; ?>
             
@@ -88,6 +88,9 @@
             <div class="files-logo-cont">
                 <img src="assets/images/paperclip.svg">
             </div>
+
+            <!-- Vocal ou non -->
+            <input type="hidden" id="vocalHidden" value="0">
 
             <div class="group-inp">
                 <textarea placeholder="Enter your message here" minlength="1" maxlength="1500" id="msg"></textarea>

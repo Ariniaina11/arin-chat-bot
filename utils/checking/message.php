@@ -10,36 +10,39 @@
         // Donnée réçue du POST
         $content = $_POST['msg'];
 
-        // // Message du client
-        // $message = new Message();
-        // $message->setUserId($user_connected);
-        // $message->setContent($content);
+        // Message du client
+        $message = new Message();
+        $message->setUserId($user_connected);
+        $message->setContent($content);
 
-        // //insertMessage($message, $connexion);
+        insertMessage($message, $connexion);
 
         // //
-    
-        // // Message du bot
-        // $message = new Message();
-        // $message->setReceiverId($user_connected);
 
         // $translated_text = translate($content, 'en', 'fr');
         // $message->setContent($translated_text);
+    
 
-        // //insertMessage($message, $connexion);
+        // Message du bot
 
-        // // Fermer la connexion
-        // $connexion = null;
+        $res = callPawanAPI($content);
+        $data = json_decode($res, true);
+        $msg = formatJsonData($data)['msg'];
 
-        // echo $translated_text;
+        // $msg = 'Response';
 
-        // $res = callPawanAPI($content);
-        // $data = json_decode($res, true);
-        // $msg = formatJsonData($data)['msg'];
+        if($msg != ''){
+            $message = new Message();
+            $message->setReceiverId($user_connected);
+            $message->setContent($msg);
 
-        $data = callBingAPI($content);
-
-        echo $data['text'];
+            insertMessage($message, $connexion);
+        }
+        
+        // Fermer la connexion
+        $connexion = null;
+        
+        echo $msg;
     }
 
     // ================================== FONCTIONS ==================================
@@ -124,7 +127,7 @@
     // FOrmatter la réponse de l'API
     function formatJsonData($data){
         $formattedData = array(
-            'msg' => $data['choices'][0]['message']['content']
+            'msg' => $data !== null ? $data['choices'][0]['message']['content'] : ''
         );
 
         return $formattedData;
@@ -134,13 +137,18 @@
     function insertMessage($message, $connexion){
         // Préparer la requête
         $stmt = $connexion->prepare(
-            'INSERT INTO messages (content, receiver_id, user_id) VALUES (?, ?, ?)'
+            'INSERT INTO messages (content, receiver_id, user_id) VALUES (:content, :receiver_id, :user_id)'
         );
 
+        // 
+        $content = $message->getContent();
+        $receiver_id = $message->getReceiverId();
+        $user_id = $message->getUserId();
+
         // Binding 
-        $stmt->bindParam(1, $message->getContent()); 
-        $stmt->bindParam(2, $message->getReceiverId());
-        $stmt->bindParam(3, $message->getUserId());
+        $stmt->bindParam('content', $content); 
+        $stmt->bindParam('receiver_id', $receiver_id);
+        $stmt->bindParam('user_id', $user_id);
 
         // Exécuter la requête
         $stmt->execute();
