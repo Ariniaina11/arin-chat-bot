@@ -23,8 +23,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat</title>
+    <title>Arin-bot</title>
     <link rel="stylesheet" href="assets/styles/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/themes/prism.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.25.0"></script>
 </head>
 <body>
 
@@ -39,7 +41,7 @@
 <div class="chat-global">
     <div class="nav-top">
         <div class="location" id="logout">
-            <img src="assets/images/left-chevron.svg">
+            <img src="assets/images/left-chevron.svg" alt="logout-img">
             <p>Logout</p>
         </div>
 
@@ -49,14 +51,14 @@
         </div>
 
         <div class="logos-call">
-            <img src="assets/images/infos.svg">
+            <img src="assets/images/infos.svg" alt="infos">
             <!-- <img src="assets/images/video-camera.svg"> -->
         </div>
     </div>
 
     <div class="conversation" id="conversation">
         <div class="talk left">
-            <img src="assets/images/arin-bot.png">
+            <img src="assets/images/arin-bot.png"  alt="arin-bot">
             <p>Bonjour ! Qu'est ce que je peux faire pour vous  &#128516; ?</p>
         </div>
 
@@ -66,28 +68,27 @@
             <!-- Message du bot -->
             <?php if($msg['user_id'] == 0): ?>
                 <div class="talk left">
-                    <img src="assets/images/arin-bot.png">
-                    <p><?= $msg['content'] ?></p>
+                    <img src="assets/images/arin-bot.png" alt="arin-bot">
+                    <p>
+                        <?=  formatText($msg['content']) ?>
+                    </p>
                 </div>
 
             <!-- Message de l'utilisateur -->
             <?php else: ?>
                 <div class="talk right" style="justify-content: flex-end;">
-                    <p><?= normalize($msg['content'], 50) ?></p>
-                    <img src="assets/images/user.png">
+                    <p><?= $msg['content'] ?></p>
+                    <img src="assets/images/user.png"  alt="user">
                 </div>
             <?php endif; ?>
             
         <?php endforeach; ?>
+
     </div>
 
     <div class="chat-form">
 
         <div class="container-inputs-stuffs">
-
-            <div class="files-logo-cont">
-                <img src="assets/images/paperclip.svg">
-            </div>
 
             <!-- Vocal ou non -->
             <input type="hidden" id="vocalHidden" value="0">
@@ -127,23 +128,19 @@
 
 <!-- Fonctions -->
 <?php
-    // Ajouter un 'à la ligne' à chaque $chars caractères
-    function normalize($text, $chars){
-        $result = "";
-        $count = 0;
-        // $text = htmlspecialchars($text);
+    // Formattage du texte
+    function formatText($msg){
+        // Modèle pour faire correspondre les extraits de code
+        $pattern = '/```([a-zA-Z0-9_]+)\s*([\s\S]+?)```/';
+        $formattedText = preg_replace_callback($pattern, 'replaceCodeSnippet', $msg);
 
-        for ($i = 0; $i < strlen($text); $i++){
-            $result .= htmlspecialchars($text[$i]);
-            $count++;
+        return $formattedText;
+    }
 
-            if($count >= $chars){
-                $result .= '<br>';
-                $count = 0;
-            }
-        }
-
-        return $result;
+    // Fonction Callback pour le remplacement
+    function replaceCodeSnippet($matches) {
+        $code = htmlspecialchars($matches[2]); // Convert special characters to HTML entities
+        return '<code class="language-javascript">' . $code . '</code>';
     }
 ?>
 

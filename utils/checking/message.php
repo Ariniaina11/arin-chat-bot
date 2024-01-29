@@ -17,21 +17,17 @@
 
         insertMessage($message, $connexion);
 
-        // //
+        try{
+            // Message du bot
+            $res = callPawanAPI($content);
+            $data = json_decode($res, true);
+            $msg = formatJsonData($data)['msg'];
+        }
+        catch(Exception $e){
+            $msg = "";
+        }
 
-        // $translated_text = translate($content, 'en', 'fr');
-        // $message->setContent($translated_text);
-    
-
-        // Message du bot
-
-        $res = callPawanAPI($content);
-        $data = json_decode($res, true);
-        $msg = formatJsonData($data)['msg'];
-
-        // $msg = 'Response';
-
-        if($msg != ''){
+        if($msg != ""){
             $message = new Message();
             $message->setReceiverId($user_connected);
             $message->setContent($msg);
@@ -42,20 +38,10 @@
         // Fermer la connexion
         $connexion = null;
         
-        echo $msg;
+        echo formatText($msg);
     }
 
     // ================================== FONCTIONS ==================================
-
-    // Appel de Bing + ChatGPT4 API 
-    function callBingAPI($msg) {
-        $bing = new Bing;
-
-        // Envoyer la requête
-        $data = $bing->ask($msg + '(Without source)');
-
-        return $data;
-    }
 
     // Appel de l'API de Pawan.Krd
     function callPawanAPI($msg){
@@ -90,48 +76,34 @@
         return $response;
     }
 
-    // Appel de l'API de chatGPT
-    function callAPI($msg){
-        $openai_endpoint = 'https://api-fakell.x10.mx/v1/chat/completions/';
     
-        $data = array(
-            'model' => 'gpt-3.5-turbo',
-            'messages' => [
-                array(
-                    'role' => 'user',
-                    'content' => $msg
-                )
-            ],
-            'stream' => false
-        );
-    
-        $header = array(
-            'Content-Type: application/json'
-        );
-    
-        $ch = curl_init();
-    
-        curl_setopt($ch, CURLOPT_URL, $openai_endpoint);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-    
-        $response = curl_exec($ch);
-    
-        curl_close($ch);
-    
-        return $response;
-    }
-
     // FOrmatter la réponse de l'API
     function formatJsonData($data){
         $formattedData = array(
-            'msg' => $data !== null ? $data['choices'][0]['message']['content'] : ''
+            'msg' => isset($data) && is_array($data) && isset($data['choices']) ? $data['choices'][0]['message']['content'] : ''
         );
 
         return $formattedData;
     }
+
+    // Formattage du texte
+    function formatText($msg){
+        // Pattern to match code snippets
+        $pattern = '/```([a-zA-Z0-9_]+)\s*([\s\S]+?)```/';
+
+        // Perform the replacement using preg_replace_callback
+        $formattedText = preg_replace_callback($pattern, 'replaceCodeSnippet', $msg);
+
+        return $formattedText;
+    }
+
+    // Fonction Callback pour le remplacement
+    function replaceCodeSnippet($matches) {
+        $code = htmlspecialchars($matches[2]); // Convert special characters to HTML entities
+        return '<code class="language-javascript">' . $code . '</code>';
+    }
+
+    // 
 
     // Insérer dans la BD
     function insertMessage($message, $connexion){
@@ -152,61 +124,5 @@
 
         // Exécuter la requête
         $stmt->execute();
-    }
-
-    // Traduire un texte
-    function translate($text, $from, $to){
-        $response = "";
-
-        try {
-            // $response = GoogleTranslate::translate($from, $to, $text);
-            $response = GoogleTranslate::translateAuto($to, $text);
-        }
-        catch(Exception $e) {
-            $response = "Error : " . $e;
-        }
-
-        return $response;
-    }
-
-    // Prendre la requête du client
-    function getClientRequest($data){
-        // Le mot clé (Au début du message)
-        $key = strtoupper($data[0]);
-        $request = array();
-
-        switch ($key) {
-            case 'DEF':
-                $request = [
-                    'key' => $key,
-                    'content' => $data[1]
-                ];
-                break;
-            case 'TRD':
-                $request = [
-                    'key' => $key,
-                    'from' => $data[1],
-                    'to' => $data[2]
-                ];
-                break;
-            
-            default:
-                $request = [
-                    'key' => 'unknown'
-                ];
-                break;
-        }
-
-        return $request;
-    }
-
-    // Convertir un string en array
-    function convertTextToArray($text){
-        return explode(" ", $text);
-    }
-
-    // Supprimer les espaces en ne laissant qu'une seule
-    function removeMultipleSpace($text){
-        return preg_replace('/\s+/', ' ', $text);
     }
 ?>

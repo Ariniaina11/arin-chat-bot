@@ -1,49 +1,23 @@
 <?php
-    // Clé du site : 6LdEcVspAAAAAJHI90sREa0LhLoEHH1H3cr7cUke
-    // Clé secrète : 6LdEcVspAAAAAIYINp_UYGF6GR7_cOKLcfAT8Yo1
+    // Clé du site : 6Lf3gVwpAAAAAPGKhhGKiAx6N3nxggUNcZhHsuXP
+    // Clé secrète : 6Lf3gVwpAAAAANa0EzgvBfBEKIA1P7piHaaESOq3
 
-    // Le secret de l'API Google recaptcha
-    $secret_key = "6LdEcVspAAAAAIYINp_UYGF6GR7_cOKLcfAT8Yo1";
+    if(isset($_POST['submit'])){ 
+        // Validate reCAPTCHA
+        $recaptcha_secret = '6Lf3gVwpAAAAANa0EzgvBfBEKIA1P7piHaaESOq3'; // Replace with your Secret Key
+        $response = $_POST['g-recaptcha-response'];
 
-    // Email
-    $email = "rabesonmamitiana@gmail.com";
+        $verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$recaptcha_secret}&response={$response}");
+        $captcha_data = json_decode($verify);
 
-    // Valeurs par défaut
-    $postData = $valErr = $statutMsg = "";
-    $status = "error";
-
-    // Si le form est submité
-    if(isset($_POST['submit_frm'])){
-        if(isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])){
-            // captcha verification
-            $api_url = "https://www.google.com/recaptcha/api/siteverify";
-            $resq_data = array(
-                'secret' => $secret_key,
-                'response' => $_POST['g-recaptcha-response'],
-                'remoteip' => $_SERVER['REMOTE_ADDR']
-            );
-
-            $curlConfig = array(
-                CURLOPT_URL => $api_url,
-                CURLOPT_POST => true,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_POSTFIELDS => $resq_data
-            );
-
-            $ch = curl_init();
-            curl_setopt_array($ch, $curlConfig);
-            $response = curl_exec($ch);
-            curl_close($ch);
-
-            $responseData = json_decode($response);
-
-            // captcha validé
-            if($responseData->success){
-                header("location:/arin-chat-bot");
-            }
-            else{
-                $statutMsg = "La vérification est échouée !";
-            }
+        if ($captcha_data->success) {
+            // reCAPTCHA verification passed
+            // Continue with your form processing
+            echo "Gooo";
+        } else {
+            // reCAPTCHA verification failed
+            // Handle the error accordingly
+            echo "reCAPTCHA verification failed.";
         }
-    }
+    } 
 ?>

@@ -2,34 +2,43 @@ $(document).ready(function(){
     let login_btn = $('#connexion');
     let pseudo = $('#pseudo');
     let password = $('#password');
-
+    
     // Clique sur connexion
     login_btn.on('click', function () {
+        // reCAPTCHA validation
+        var response = grecaptcha.getResponse(); 
+
+        // Données du POST
         let data = {
             'connexion' : true,
             'pseudo' : pseudo.val(),
             'password' : password.val()
         };
 
-        $.ajax({
-            url : 'utils/checking/login.php',
-            type : 'POST',
-            data : data,
-            success : function(result){
-                if(result == "success"){
-                    window.location = "/arin-chat-bot/"
-                    // alert('Success !');
+        // reCAPTCHA non vérifié
+        if (response.length === 0) {
+            alert("Please verify reCAPTCHA before submitting the form");
+        }
+        else {
+            $.ajax({
+                url : 'utils/checking/login.php',
+                type : 'POST',
+                data : data,
+                success : function(result){
+                    if(result == "success"){
+                        window.location = "/arin-chat-bot/"
+                        // alert('Success !');
+                    }
+                    else{
+                        // alert('Authentification failed !');
+                        openPopup('Authentification failed !');
+                    }
+                },
+                error : function(result) {
+                    alert('Error ' + result.message);
                 }
-                else{
-                    // alert('Authentification failed !');
-                    openPopup('Authentification failed !');
-                }
-            },
-            error : function(result) {
-                alert('Error ' + result.message);
-            }
-
-        });
+            });
+        }
     });
 
     // Clique sur 'Entrée'
@@ -68,7 +77,7 @@ $(document).ready(function(){
 
     // Afficher le popup
     function openPopup(txt) {
-        box.fadeTo(400, 0.3);
+        box.fadeTo(100, 0.3);
         popup_text.text(txt);
         popup.show();
     }

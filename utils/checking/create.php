@@ -29,14 +29,12 @@
                 echo 'empty';
             }
             else{
-                $user = new user($pseudo, $pass);
+                $user = new User($pseudo, md5($pass));
                 insertData($user, $connexion);
     
                 echo "success";
             }
         }
-
-
     }
     else{
         header('location: ../../create.php');
@@ -68,9 +66,13 @@
         // Préparer la requête
         $stmt = $connexion->prepare('INSERT INTO users (pseudo, pass) VALUES (:pseudo, :pass)');
 
+        //
+        $pseudo = $user->getPseudo();
+        $pass = $user->getPassword();
+
         // Binding 
-        $stmt->bindParam('pseudo', $user->getPseudo());
-        $stmt->bindParam('pass', $user->getPassword());
+        $stmt->bindParam('pseudo', $pseudo);
+        $stmt->bindParam('pass', $pass);
 
         // Exécuter la requête
         $stmt->execute();

@@ -173,6 +173,7 @@ body {
     height: 40px;
     padding-top: 10px;
     font-family: Arial, Helvetica, sans-serif;
+    margin-left: 10px;
 }
 
 .files-logo-cont {
@@ -267,6 +268,13 @@ body {
     background-color: rgb(78, 168, 131);
 }
 
+/* Code */
+code{
+    display: block;
+    margin: 10px;
+    width: 95%;
+    font-size: 0.9em;
+}
 
 /********** LOADING **********/
 

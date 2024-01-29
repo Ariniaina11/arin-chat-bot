@@ -60,7 +60,7 @@ $(document).ready(function(){
     // Clique sur 'OK - Success'
     ok_success_btn.on('click', function(){
         closePopup();
-        window.location = '/arin-chat/login.php'
+        window.location = '/arin-chat-bot/login.php'
     })
 
     // Clique en dehors du popup

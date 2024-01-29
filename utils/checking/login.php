@@ -3,7 +3,7 @@
 
     if(isset($_POST['connexion'])){
         $pseudo = $_POST['pseudo'];
-        $pass = $_POST['password'];
+        $pass = md5($_POST['password']);
 
         $data = [
             'pseudo' => $pseudo,
@@ -51,5 +51,4 @@
             'user_id' => $user['id']
         ];
     }
-
 ?>
