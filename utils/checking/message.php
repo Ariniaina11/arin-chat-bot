@@ -45,8 +45,6 @@
 
     // Appel de l'API de Pawan.Krd
     function callPawanAPI($msg){
-        $apiKey = 'okQGzHNPqSQeNonkYyacLllCCXuWJJNvyUhsBCLujnvggxhH';
-
         $data = array(
             'model' => 'pai-001-light-beta',
             'messages' => [
@@ -58,7 +56,7 @@
         );
 
         $headers = array(
-            'Authorization: Bearer pk-' . $apiKey,
+            'Authorization: Bearer ' . API::$OPENAI_KEY,
             'Content-Type: application/json'
         );
 

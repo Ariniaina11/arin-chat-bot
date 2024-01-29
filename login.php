@@ -43,7 +43,7 @@
             <input type="password" class="credentials" name="password" id="password" placeholder="Your password"><br>
 
              <!-- Google reCAPTCHA -->
-             <div class="g-recaptcha" data-sitekey="6Lf3gVwpAAAAAPGKhhGKiAx6N3nxggUNcZhHsuXP"></div>
+             <div class="g-recaptcha" data-sitekey="<?= API::$CAPTCHA_SITE_KEY ?>"></div>
 
             <input type="submit" value="CONNEXION" id="connexion" name="connexion">
         </div>
