@@ -7,6 +7,12 @@ It is an automated conversation application utilizing the OpenAI API (through a 
 
 ## Steps
 
+Clone this repository
+
+```git
+git clone https://github.com/Ariniaina11/arin-chat-bot/
+```
+
 Create a new database. 
 
 Import the file _chat.sql_
