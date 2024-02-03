@@ -28,13 +28,14 @@ $(document).ready(function(){
         $.ajax({
             url : 'utils/checking/message.php',
             type : 'POST',
+            dataType: 'json',
             data : data,
             success : function(result){
                 if(result != ''){
                     // La réponse du bot
                     value = '<div class="talk left">' +
                                 '<img src="assets/images/arin-bot.png">' +
-                                '<p>' + result + '</p>' +
+                                '<p>' + result.response + '</p>' +
                             '</div>'
 
                     conversation.append(value); // Ajouter la réponse sur la conversation
@@ -43,7 +44,9 @@ $(document).ready(function(){
                     scrollDown();
 
                     if(vocal_hidden.val() == '1'){
-                        speak(result);
+                        let lang_codes = Object.keys(result.lang)
+                        let high_probability = lang_codes[0];
+                        speak(result.response, high_probability);
                     }
 
                     responseReceived();
@@ -52,7 +55,6 @@ $(document).ready(function(){
                     responseReceived();
                     alert('Erreur de serveur !')
                 }
-                
             },
             error : function(result) {
                 alert('Une érreur s\'est produite : ' + result['statusText']);
@@ -93,45 +95,10 @@ $(document).ready(function(){
     });
 
     // Parler
-    function speak(text) {
-        // const array = divideText(text)
-
-        // array.forEach(element => {
-        //     let speech = new SpeechSynthesisUtterance(element);
-        //     speechSynthesis.speak(speech);
-        // });
-
-        // console.log(array)
+    function speak(text, lang) {
         let speech = new SpeechSynthesisUtterance(text);
+        speech.lang = lang;
         speechSynthesis.speak(speech);
-    }
-
-    // Diviser le texte
-    function divideText(text) {
-        let array_divided = [];
-        let array = text.split(" ")
-
-        let str = array[0]; // Premier mot
-        let punctuations = ".:!?"; // Qqs ponctuations (Il faut arrêter de dire à chaque ponctuation)
-        let stack = true;
-        for (let i = 1; i < array.length; i++) {
-            let get_str = str + " " + array[i]
-            let last_char = get_str.charAt(get_str.length - 1);
-
-            if (get_str.length <= 210 && !punctuations.includes(last_char)){
-                str = (str + " " + array[i]);
-                stack = false;
-            } else {
-                array_divided.push(get_str);
-                str = ""
-                stack= true;
-            }
-        }
-
-        if(!stack)
-            array_divided.push(str);
-
-        return array_divided;
     }
 
     // Scroll vers le bas

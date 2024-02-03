@@ -3,6 +3,7 @@
 
     use Mgcodeur\SuperTranslator\GoogleTranslate;
     use Fakell\Bing\Bing;
+    use LanguageDetection\Language;
 
     $user_connected = $_SESSION['user_connected'];
 
@@ -38,7 +39,17 @@
         // Fermer la connexion
         $connexion = null;
         
-        echo formatText($msg);
+        // Les données de la réponse
+        $data = array(
+            "response" => formatText($msg),
+            "lang" => detectLang($msg)
+        );
+
+        // Contenu de la réponse en format "json"
+        header("Content-Type: application/json");
+
+        // Encoder l'array en tant que json et afficher
+        echo json_encode($data);
     }
 
     // ================================== FONCTIONS ==================================
@@ -122,5 +133,12 @@
 
         // Exécuter la requête
         $stmt->execute();
+    }
+
+    // Détéction de la langue
+    function detectLang($text) {
+        $lang = new Language;
+
+        return $lang->detect($text);
     }
 ?>

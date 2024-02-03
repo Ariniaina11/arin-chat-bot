@@ -140,7 +140,7 @@
     // Fonction Callback pour le remplacement
     function replaceCodeSnippet($matches) {
         $code = htmlspecialchars($matches[2]); // Convert special characters to HTML entities
-        return '<code class="language-javascript">' . $code . '</code>';
+        return '<code class="language-javascript">' . nl2br($code) . '</code>';
     }
 ?>
 
