@@ -22,12 +22,6 @@
 
     <!-- Google recaptcha JS API -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
-    <script>
-        function onSubmit(token) {
-            document.getElementById("myForm").submit();
-        }
-    </script>
 </head>
 <body>
     <!-- Popup -->

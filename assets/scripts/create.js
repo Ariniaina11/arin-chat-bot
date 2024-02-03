@@ -7,6 +7,10 @@ $(document).ready(function(){
     
     // Clique sur create
     create_btn.on('click', function () {
+        // reCAPTCHA validation
+        var response = grecaptcha.getResponse(); 
+
+        // Les donées du formulaire
         let data = {
             'creation' : true,
             'pseudo' : pseudo.val(),
@@ -14,35 +18,42 @@ $(document).ready(function(){
             'conf_password' : conf_password.val()
         };
 
-        $.ajax({
-            url : 'utils/checking/create.php',
-            type : 'POST',
-            data : data,
-            success : function(result){
-                console.log(result);
-                switch (result) {
-                    case 'success':
-                        openPopup("Account created successfully !", true);
-                        break;
-                    case 'pseudo_err':
-                        openPopup('Pseudo already exist !');
-                        break;
-                    case 'conf_pass_err':
-                        openPopup('Password doesn\'t match !');
-                        break;
-                    case 'empty':
-                        openPopup('Sorry ! You can\'t use this pseudo.');
-                        break;
-                
-                    default:
-                        openPopup('Sorry ! You can\'t use this pseudo.');
-                        break;
+         // reCAPTCHA non vérifié
+         if (response.length === 0) {
+            alert("Please verify reCAPTCHA before submitting the form");
+        }
+        else{
+            $.ajax({
+                url : 'utils/checking/create.php',
+                type : 'POST',
+                data : data,
+                success : function(result){
+                    console.log(result);
+                    switch (result) {
+                        case 'success':
+                            openPopup("Account created successfully !", true);
+                            break;
+                        case 'pseudo_err':
+                            openPopup('Pseudo already exist !');
+                            break;
+                        case 'conf_pass_err':
+                            openPopup('Password doesn\'t match !');
+                            break;
+                        case 'empty':
+                            openPopup('Sorry ! You can\'t use this pseudo.');
+                            break;
+                    
+                        default:
+                            openPopup('Sorry ! You can\'t use this pseudo.');
+                            break;
+                    }
+                },
+                error : function(result) {
+                    alert('Error ' + result.message);
                 }
-            },
-            error : function(result) {
-                alert('Error ' + result.message);
-            }
-        });
+            });
+        }
+        
     });
 
     // ============================ POPUP ============================ //

@@ -1,3 +1,6 @@
+<?php
+    require("utils/autoload.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creation</title>
     <link rel="stylesheet" href="assets/styles/create.css">
+
+    <!-- Google recaptcha JS API -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
     <!-- Popup -->
@@ -21,6 +27,10 @@
             <input type="text" class="credentials" name="pseudo" id="pseudo" placeholder="Your pseudo"><br>
             <input type="password" class="credentials" name="password" id="password" placeholder="Your password"><br>
             <input type="password" class="credentials" name="conf_password" id="conf_password" placeholder="Confirm password"><br>
+
+            <!-- Google reCAPTCHA -->
+            <div class="g-recaptcha" data-sitekey="<?= API::$CAPTCHA_SITE_KEY ?>"></div>
+
             <input type="submit" value="CREATE ACCOUNT" name="creation" id="creation">
         </div>
         <p>Already have an account ? <a href="login.php" class="a-login">Login now</a></p>

@@ -121,6 +121,14 @@ input{
     text-decoration: underline;
 }
 
+/********* reCPATCHA *********/
+.g-recaptcha{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+}
+
 /********** SCREEN **********/
 
 @media (max-width: 600px) {
