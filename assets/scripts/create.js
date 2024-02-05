@@ -40,11 +40,11 @@ $(document).ready(function(){
                             openPopup('Password doesn\'t match !');
                             break;
                         case 'empty':
-                            openPopup('Sorry ! You can\'t use this pseudo.');
+                            openPopup('Sorry, you can\'t use this pseudo !');
                             break;
                     
                         default:
-                            openPopup('Sorry ! You can\'t use this pseudo.');
+                            openPopup('Sorry, you can\'t use this pseudo !');
                             break;
                     }
                 },

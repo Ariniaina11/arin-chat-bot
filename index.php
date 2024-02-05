@@ -48,7 +48,6 @@
 
         <div class="utilisateur">
             <p>Arin - Bot</p>
-            <p>Active</p>
         </div>
 
         <div class="logos-call">
