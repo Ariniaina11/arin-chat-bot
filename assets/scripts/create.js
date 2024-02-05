@@ -18,8 +18,8 @@ $(document).ready(function(){
             'conf_password' : conf_password.val()
         };
 
-         // reCAPTCHA non vérifié
-         if (response.length === 0) {
+        // reCAPTCHA non vérifié
+        if (response.length === 0) {
             alert("Please verify reCAPTCHA before submitting the form");
         }
         else{

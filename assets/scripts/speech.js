@@ -24,7 +24,7 @@ $(document).ready(function(){
             console.log('Recording...')
 
             recognition = new SpeechRecognition();
-            recognition.lang = 'fr';
+            recognition.lang = 'en';
             recognition.interimResults = true;
             recognition.start();
             
@@ -51,17 +51,17 @@ $(document).ready(function(){
             recognition.onerror = (event) => {
                 stopRecording();
                 if (event.error === "no-speech") {
-                    alert("No speech was detected. Stopping...");
+                    console.log("No speech was detected. Stopping...");
                 } else if (event.error === "audio-capture") {
-                    alert(
+                    console.log(
                     "No microphone was found. Ensure that a microphone is installed."
                     );
                 } else if (event.error === "not-allowed") {
-                    alert("Permission to use microphone is blocked.");
+                    console.log("Permission to use microphone is blocked.");
                 } else if (event.error === "aborted") {
-                    alert("Listening Stopped.");
+                    console.log("Listening Stopped.");
                 } else {
-                    alert("Error occurred in recognition: " + event.error);
+                    console.log("Error occurred in recognition: " + event.error);
                 }
             };
         } catch (error) {
@@ -90,7 +90,7 @@ $(document).ready(function(){
         recognition.stop();
         recording = false;
 
-        console.log('Stopped')
+        responseReceived();
     }
 
     // Clique sur vocal
