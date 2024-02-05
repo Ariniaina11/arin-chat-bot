@@ -17,6 +17,14 @@ Create a new database.
 
 Import the file _chat.sql_
 
+Edit the credentials on /utils/database.php
+```php
+
+$db_name = 'DB_NAME';
+$username = 'DB_USERNAME';
+$pass = 'USER_PASSWORD';
+
+```
 Edit the credentials on /utils/objects/api.php
 
 ```php
