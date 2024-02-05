@@ -24,6 +24,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arin-bot</title>
+    <link rel="shortcut icon" href="assets/images/arin-bot.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/styles/index.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/themes/prism.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.25.0"></script>
@@ -57,10 +58,6 @@
     </div>
 
     <div class="conversation" id="conversation">
-        <div class="talk left">
-            <img src="assets/images/arin-bot.png"  alt="arin-bot">
-            <p>Bonjour ! Qu'est ce que je peux faire pour vous  &#128516; ?</p>
-        </div>
 
         <!-- Une boucle affichant le message -->
         <?php foreach($messages as $msg): ?>

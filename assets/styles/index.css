@@ -130,6 +130,12 @@ body {
     color: #000;
 }
 
+/* Pseudo de l'utilisateur */
+.mypseudo{
+    color: rgb(4 105 189);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
 /* **********FORM********** */
 
 .chat-form {
