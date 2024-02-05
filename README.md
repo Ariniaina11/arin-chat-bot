@@ -42,3 +42,6 @@ public static $CAPTCHA_SECRET = "YOUR_CAPTCHA_SECRET";
 
 ## Pawan.Krd reverse proxy
 https://github.com/PawanOsman/ChatGPT
+
+## Language detection for PHP
+https://github.com/patrickschur/language-detection
