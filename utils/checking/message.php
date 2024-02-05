@@ -1,8 +1,6 @@
 <?php
     require('../autoload.php');
 
-    use Mgcodeur\SuperTranslator\GoogleTranslate;
-    use Fakell\Bing\Bing;
     use LanguageDetection\Language;
 
     $user_connected = $_SESSION['user_connected'];
