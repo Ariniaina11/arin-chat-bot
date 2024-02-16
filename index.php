@@ -135,18 +135,44 @@
 
 <!-- Fonctions -->
 <?php
-    // Formattage du texte
+    // Formattage de texte (Pour le code source, commande Linux, ...)
     function formatText($msg){
-        // Modèle pour faire correspondre les extraits de code
+        $formattedCode = formatCode($msg);
+        $formattedTerminal = formatTerminal($formattedCode);
+        
+        return $formattedTerminal;
+    }
+
+    // Pattern pour formatter les extraits du code
+    function formatCode($msg){
         $pattern = '/```([a-zA-Z0-9_*]+)\s*([\s\S]+?)```/';
         $formattedText = preg_replace_callback($pattern, 'replaceCodeSnippet', $msg);
 
         return $formattedText;
     }
 
-    // Fonction Callback pour le remplacement
+    // Pattern pour formatter les commandes Terminal
+    function formatTerminal($msg){
+        // Modèle 1
+        $pattern = '/`(\$ \s*([\s\S]+?))`/';
+        $formattedText = preg_replace_callback($pattern, 'replaceTerminalSnippet', $msg);
+
+        // Modèle 2
+        $pattern = '/```\s*([\s\S]+?)```/';
+        $formattedText = preg_replace_callback($pattern, 'replaceTerminalSnippet', $formattedText);
+
+        return $formattedText;
+    }
+
+    // Fonction Callback pour le remplacement du code
     function replaceCodeSnippet($matches) {
         $code = htmlspecialchars($matches[2]); // Convert special characters to HTML entities
+        return '<code class="language-javascript">' . $code . '</code>';
+    }
+
+    // Fonction Callback pour le remplacement des commandes sur Terminal
+    function replaceTerminalSnippet($matches) {
+        $code = htmlspecialchars($matches[1]); // Convert special characters to HTML entities
         return '<code class="language-javascript">' . $code . '</code>';
     }
 ?>
