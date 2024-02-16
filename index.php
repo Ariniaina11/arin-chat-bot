@@ -5,6 +5,8 @@
     if(!isset($_SESSION['user_connected']))
         header('location:login.php');
 
+    // $_SESSION['user_connected'] = 27;
+
     // Préparer la requête
     $stmt = $connexion->prepare('SELECT * FROM messages WHERE user_id = ? OR receiver_id = ?');
 
@@ -26,8 +28,9 @@
     <title>Arin-bot</title>
     <link rel="shortcut icon" href="assets/images/arin-bot.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/styles/index.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/themes/prism.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.25.0"></script>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/themes/prism.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.25.0"></script> -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/themes/prism.css" rel="stylesheet">
 </head>
 <body>
 
@@ -42,7 +45,7 @@
 <div class="chat-global">
     <div class="nav-top">
         <div class="location" id="logout">
-            <img src="assets/images/left-chevron.svg" alt="logout-img">
+            <img src="assets/images/logout.png" alt="logout-img">
             <p>Logout</p>
         </div>
 
@@ -50,8 +53,8 @@
             <p>Arin - Bot</p>
         </div>
 
-        <div class="logos-call">
-            <img src="assets/images/infos.svg" alt="infos">
+        <div class="api-choice">
+            <img src="assets/images/openai.png" alt="infos">
             <!-- <img src="assets/images/video-camera.svg"> -->
         </div>
     </div>
@@ -89,6 +92,10 @@
             <!-- Vocal ou non -->
             <input type="hidden" id="vocalHidden" value="0">
 
+            <button type="button" class="submit-msg-btn" id="vocal-btn">
+                <img src="assets/images/vocal.png">
+            </button>
+
             <div class="group-inp">
                 <textarea placeholder="Enter your message here" minlength="1" maxlength="1500" id="msg"></textarea>
             </div>
@@ -105,11 +112,9 @@
                 <span style="--i:8;"></span>
             </div>
 
-            <button class="submit-msg-btn" id="vocal-btn">
-                <img src="assets/images/vocal.png">
-            </button>
+            
             <button class="submit-msg-btn" id="send-btn">
-                <img src="assets/images/send.svg">
+                <img src="assets/images/send.png">
             </button>
         </div>
     </div>
@@ -121,13 +126,19 @@
 <!-- <script src="https://code.responsivevoice.org/responsivevoice.js?key=5yuiVGtS"></script> -->
 <script src="assets/scripts/speech.js"></script>
 <script src="assets/scripts/languages.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/prism.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Prism.highlightAll();
+    });
+</script>
 
 <!-- Fonctions -->
 <?php
     // Formattage du texte
     function formatText($msg){
         // Modèle pour faire correspondre les extraits de code
-        $pattern = '/```([a-zA-Z0-9_]+)\s*([\s\S]+?)```/';
+        $pattern = '/```([a-zA-Z0-9_*]+)\s*([\s\S]+?)```/';
         $formattedText = preg_replace_callback($pattern, 'replaceCodeSnippet', $msg);
 
         return $formattedText;
@@ -136,7 +147,7 @@
     // Fonction Callback pour le remplacement
     function replaceCodeSnippet($matches) {
         $code = htmlspecialchars($matches[2]); // Convert special characters to HTML entities
-        return '<code class="language-javascript">' . nl2br($code) . '</code>';
+        return '<code class="language-javascript">' . $code . '</code>';
     }
 ?>
 

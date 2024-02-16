@@ -1,5 +1,5 @@
 body{
-    background-color: white;
+    background-color: #4c4a4a;
 }
 
 .box{
@@ -15,9 +15,10 @@ body{
 }
 
 h1{
-    color: #0078FF;
+    color: #9d9e9f;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
 
 input{
     display: block;
@@ -28,12 +29,12 @@ input{
 
 .credentials{
     outline: none;
-    color: rgb(92, 91, 91);
+    color: rgb(175 175 175);
     width: 60%;
-    border: 1px solid rgb(226, 226, 226);
-    border-radius: 10px;
+    border: 1px solid rgb(104 104 104);
+    border-radius: 2px;
     margin-left: 15%;
-    background-color: rgb(236, 237, 238);
+    background-color: #33353e;
     display: block;
     margin: 0 auto;
 }
@@ -41,9 +42,9 @@ input{
 #connexion{
     font-size: 16px;
     cursor: pointer;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    border: 1px solid #0078FF;
-    border-radius: 5px;
+    font-family: sans-serif;
+    border: 1px solid #4a6b93;
+    border-radius: 3px;
     background-color: #0078FF;
     color: whitesmoke;
     letter-spacing: 2px;

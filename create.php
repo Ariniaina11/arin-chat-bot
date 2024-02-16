@@ -23,7 +23,7 @@
     </div>
 
     <div class="box">
-        <h1>Creation</h1>
+        <h1>- Register -</h1>
         <div>
             <input type="text" class="credentials" name="pseudo" id="pseudo" placeholder="Your pseudo"><br>
             <input type="password" class="credentials" name="password" id="password" placeholder="Your password"><br>
@@ -32,14 +32,24 @@
             <!-- Google reCAPTCHA -->
             <div class="g-recaptcha" data-sitekey="<?= API::$CAPTCHA_SITE_KEY ?>"></div>
 
-            <input type="submit" value="CREATE ACCOUNT" name="creation" id="creation">
+            <input type="submit" value="REGISTER" name="creation" id="creation">
         </div>
-        <p>Already have an account ? <a href="login.php" class="a-login">Login now</a></p>
+        <p style="color: #b1b2b3;">Already have an account ? <a href="login.php" class="a-login">Login now</a></p>
     </div>
 </body>
 
 <!-- Scripts -->
 <script src="assets/scripts/jquery.js"></script>
 <script src="assets/scripts/create.js"></script>
+<script>
+    function onSubmit(token) {
+        // reCAPTCHA validation successful
+        // Hide the reCAPTCHA element
+        document.getElementById("recaptcha-container").style.display = "none";
+        // Perform any additional actions you want to take after validation
+        // For example, submit a form or display a success message
+        // Add your code here
+    }
+</script>
 
 </html>

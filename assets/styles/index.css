@@ -7,6 +7,7 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     height: 100vh;
+    background-color: #4c4a4a;
 }
 
 .chat-global {
@@ -24,13 +25,14 @@ body {
 }
 
 .nav-top {
-    position: absolute;
-    background: #fff;
+    position: relative;
+    background: #33353e;
     top: 0px;
     width: 100%;
     height: 70px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid rgba(51,51,51,0.2);
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
@@ -48,32 +50,29 @@ body {
 .location p {
     font-size: 20px;
     margin-left: 5px;
+    color:  #b0c1c1;
 }
 
 .utilisateur {
-    width: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    flex: 1;
+    text-align: center;
 }
 
 .utilisateur p:nth-child(1){
     font-size: 20px;
-}
-.utilisateur p:nth-child(2){
-    font-size: 14px;
-    opacity: 0.8;
+    color: #199be2;
+    font-family: cursive;
+    letter-spacing: 2px;
 }
 
-.logos-call {
-    cursor: pointer;
-    width: 50px;
-    display: flex;
+.api-choice {
+    flex: 1;
+    text-align: right;
 }
-.logos-call img {
-    margin-right: 20px;
-    width: 30px
+
+.api-choice img{
+    width: 60px;
+    padding: 5px 10px;
 }
 
 
@@ -89,6 +88,25 @@ body {
     overflow-y: scroll;
     padding: 10px;
 }
+
+/* Scroll (Conversation) */
+
+.conversation::-webkit-scrollbar {
+    width: 10px;
+    padding: 2px;
+}
+
+.conversation::-webkit-scrollbar-track {
+    background: #4c4a4a; /* Fond de la barre de défilement */
+}
+
+.conversation::-webkit-scrollbar-thumb {
+    background-color: #888; /* Couleur de la curseur */
+    border-radius: 3px;
+}
+
+/*  */
+
 .talk {
     margin: 20px 0;
     color: #f1f1f1;
@@ -109,7 +127,7 @@ body {
     padding: 15px;
     line-height: 25px;
     border-radius: 20px;
-    /* background: #000; */
+    text-align: justify;
 }
 .right {
     /* margin-left: 50px; */
@@ -122,12 +140,12 @@ body {
 .right p {
     max-width: 100%;
     margin-right: 10px;
-    background:#0078FF;
+    background:#3b5674;
 }
 .left p {
     margin-left: 10px;
-    background: rgb(216,216,216);
-    color: #000;
+    background: rgb(52 52 52 / 47%);
+    color: #cfc9c9;
 }
 
 /* Pseudo de l'utilisateur */
@@ -144,7 +162,7 @@ body {
     height: 90px;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
-    background: #f1f1f1;
+    background: #33353e;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -152,7 +170,7 @@ body {
 }
 
 .container-inputs-stuffs {
-    background: #fff;
+    background: #4c4a4a;
     display: flex;
     width: 96%;
     height: 60px;
@@ -173,55 +191,51 @@ body {
     resize: none;
     border: none;
     outline: none;
-    padding-left: 10px;
     font-size: 16px;
     width: 100%;
     height: 40px;
     padding-top: 10px;
     font-family: Arial, Helvetica, sans-serif;
-    margin-left: 10px;
-}
-
-.files-logo-cont {
-    border-top-left-radius: 25px;
-    border-bottom-left-radius: 25px;
-    padding-left: 10px;
-    display: block;
-    height: 100%;
-    width: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-.files-logo-cont img {
-    width: 30px;
+    background-color: transparent;
+    color: #bdc3df;
 }
 
 .submit-msg-btn {
-    background: #fff;
+    background: transparent;
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
     width: 70px;
     border: none;
     display: flex;
-    padding-right: 5px;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    padding: 5px;
+
 }
 
 .submit-msg-btn img {
     width: 30px;
 }
 
+.submit-msg-btn img:hover {
+    padding: 3px;
+    background-color: #535858;
+    transition: 0.3s;
+}
+
+
 /* OTHERS */
 #vocal-btn{
     cursor: pointer;
+    margin: 8px 0px;
+    padding: 5px;
 }
 
 #logout{
     cursor: pointer;
+    flex: 1;
+    text-align: left;
 }
 
 /* POPUP */
@@ -266,20 +280,47 @@ body {
 }
 
 #yes-btn{
-    background-color: rgb(42, 168, 116);
+    background-color: #199be2;
 }
 
 #yes-btn:hover{
     transition: .2s;
-    background-color: rgb(78, 168, 131);
+    background-color: #2aa6e9;
 }
 
-/* Code */
+/************* Code *************/
 code{
-    display: block;
-    margin: 10px;
-    width: 95%;
-    font-size: 0.9em;
+    display: block !important;
+    background-color: #565656 !important;
+    color: #ddcaeb !important;
+    text-shadow: 0 1px #8f8f8f !important;
+    white-space: pre !important;
+    padding: 10px !important;
+    margin: 10px !important;
+    overflow-x: auto;
+}
+
+/* Séléction du contenu */
+code::selection, .token::selection{
+    background-color: #323333 !important;
+}
+
+.token{
+    background-color: #565656 !important;
+}
+
+/* STYLE DU SCROLLBAR (Code) */
+code::-webkit-scrollbar {
+    height: 6px;
+}
+
+code::-webkit-scrollbar-track {
+    background: #f4f4f4; /* Fond de la barre de défilement */
+}
+
+code::-webkit-scrollbar-thumb {
+    background-color: #888; /* Couleur de la curseur */
+    border-radius: 3px;
 }
 
 /********** LOADING **********/
@@ -326,8 +367,10 @@ code{
 
 @media (min-height: 450px) and (max-height: 550px){
     .conversation{ padding-top: 40px; }
+    #popup{height: 100px;}
 }
 
 @media (max-height: 450px){
     .conversation{ padding-top: 50px; }
+    #popup{height: 100px;}
 }

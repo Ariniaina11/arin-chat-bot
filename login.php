@@ -32,7 +32,7 @@
         <button id="ok-btn">OK</button>
     </div>
     <div class="box">
-        <h1>Login</h1>
+        <h1>- Login -</h1>
         <div>
             <input type="text" class="credentials" name="pseudo" id="pseudo" placeholder="Your pseudo"><br>
             <input type="password" class="credentials" name="password" id="password" placeholder="Your password"><br>
@@ -42,7 +42,7 @@
 
             <input type="submit" value="CONNEXION" id="connexion" name="connexion">
         </div>
-        <p>Not have account yet ? <a href="create.php" class="a-create">Create here</a></p>
+        <p style="color: #b1b2b3;">Not have account yet ? <a href="create.php" class="a-create">Create here</a></p>
     </div>
 </body>
 
