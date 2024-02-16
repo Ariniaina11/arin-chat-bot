@@ -131,6 +131,32 @@
     document.addEventListener('DOMContentLoaded', function() {
         Prism.highlightAll();
     });
+
+    // Copie dans la presse-papier
+    function copyCode(copy_btn) {
+        //  Obtenir l'élément <code>
+        var codeElement = document.querySelector('code.language-javascript');
+        if (codeElement) {
+            // Créer un élément textarea pour contenir temporairement le texte
+            var textarea = document.createElement('textarea');
+            textarea.value = copy_btn.nextElementSibling.textContent;
+            document.body.appendChild(textarea);
+    
+            // Sélectionnez le texte dans la zone de texte
+            textarea.select();
+            textarea.setSelectionRange(0, 99999); // Pour les appareils mobiles
+    
+            // Copier le texte dans le presse-papiers
+            document.execCommand('copy');
+    
+            // Supprimer l’élément textarea
+            document.body.removeChild(textarea);
+    
+            // Changer le texte sur le bouton
+            copy_btn.textContent = "Copied !!";
+            
+        }
+    }
 </script>
 
 <!-- Fonctions -->
@@ -164,16 +190,20 @@
         return $formattedText;
     }
 
+    // ====================================== CALLBACKS ======================================
+
     // Fonction Callback pour le remplacement du code
     function replaceCodeSnippet($matches) {
-        $code = htmlspecialchars($matches[2]); // Convert special characters to HTML entities
-        return '<code class="language-javascript">' . $code . '</code>';
+        $code = htmlspecialchars($matches[2]); // Convertir des caractères spéciaux en entités HTML
+        return '<button type="submit" class="copy" onclick="copyCode(this)">Copy</button>' .
+                '<code class="language-javascript">' . $code . '</code>';
     }
 
     // Fonction Callback pour le remplacement des commandes sur Terminal
     function replaceTerminalSnippet($matches) {
-        $code = htmlspecialchars($matches[1]); // Convert special characters to HTML entities
-        return '<code class="language-javascript">' . $code . '</code>';
+        $code = htmlspecialchars($matches[1]); // Convertir des caractères spéciaux en entités HTML
+        return '<button type="submit" class="copy" onclick="copyCode(this)">Copy</button>' .
+                '<code class="language-javascript">' . $code . '</code>';
     }
 ?>
 

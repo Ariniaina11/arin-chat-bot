@@ -323,6 +323,20 @@ code::-webkit-scrollbar-thumb {
     border-radius: 3px;
 }
 
+/* // */
+.copy{
+    display: block;
+    width: 20%;
+    margin: auto;
+    border-radius: 3px 0px;
+    padding: 2px;
+    color: #33353e;
+    background-color: #cacad3;
+    cursor: pointer;
+    margin-bottom: -2%;
+}
+
+
 /********** LOADING **********/
 
 .loading span{
