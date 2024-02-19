@@ -38,7 +38,7 @@
                 $userId = $connexion->lastInsertId();
 
                 $message = new Message();
-                $message->setContent("Hello <strong class='mypseudo'>". $pseudo . "</strong> ! Welcome to Arin-Bot, how can I help you ? &#128516;");
+                $message->setContent("Hello <!-- REPLACE --><strong class='mypseudo'>". $pseudo . "</strong><!-- REPLACE --> ! Welcome to Arin-Bot, how can I help you ? &#128516;");
                 $message->setReceiverId($userId);
 
                 insertDefaultMsg($message, $connexion);

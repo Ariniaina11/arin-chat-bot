@@ -43,6 +43,7 @@ $(document).ready(function(){
 
                     scrollDown();
 
+                    // Vocal
                     if(vocal_hidden.val() == '1'){
                         let lang_codes = Object.keys(result.lang)
                         let high_probability = lang_codes[0];
@@ -57,6 +58,7 @@ $(document).ready(function(){
                 }
             },
             error : function(result) {
+                responseReceived();
                 alert('Une érreur s\'est produite : ' + result['statusText']);
                 console.log(result);
             }

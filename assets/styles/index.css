@@ -291,7 +291,7 @@ body {
 /************* Code *************/
 code{
     display: block !important;
-    background-color: #565656 !important;
+    background-color: #323333 !important;
     color: #ddcaeb !important;
     text-shadow: 0 1px #8f8f8f !important;
     white-space: pre !important;
@@ -302,11 +302,11 @@ code{
 
 /* Séléction du contenu */
 code::selection, .token::selection{
-    background-color: #323333 !important;
+    background-color: #494949 !important;
 }
 
 .token{
-    background-color: #565656 !important;
+    background-color: #323333 !important;
 }
 
 /* STYLE DU SCROLLBAR (Code) */
@@ -323,17 +323,26 @@ code::-webkit-scrollbar-thumb {
     border-radius: 3px;
 }
 
-/* // */
+/* Bouton - copy */
 .copy{
     display: block;
-    width: 20%;
-    margin: auto;
-    border-radius: 3px 0px;
+    width: 50%;
     padding: 2px;
-    color: #33353e;
-    background-color: #cacad3;
-    cursor: pointer;
+    margin: auto;
     margin-bottom: -2%;
+    margin-top: 2%;
+    border: 1px solid #767171;
+    color: #cfc9c9;
+    background-color: #383737;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 600;
+}
+
+.copy:hover{
+    background-color: rgb(68, 68, 68);
+    transition: .3s;
 }
 
 

@@ -39,7 +39,7 @@
         
         // Les données de la réponse
         $data = array(
-            "response" => formatText($msg),
+            "response" => Static_Method::formatText($msg),
             "lang" => detectLang($msg)
         );
 
@@ -92,25 +92,6 @@
 
         return $formattedData;
     }
-
-    // Formattage du texte
-    function formatText($msg){
-        // Pattern to match code snippets
-        $pattern = '/```([a-zA-Z0-9_]+)\s*([\s\S]+?)```/';
-
-        // Perform the replacement using preg_replace_callback
-        $formattedText = preg_replace_callback($pattern, 'replaceCodeSnippet', $msg);
-
-        return $formattedText;
-    }
-
-    // Fonction Callback pour le remplacement
-    function replaceCodeSnippet($matches) {
-        $code = htmlspecialchars($matches[2]); // Convert special characters to HTML entities
-        return '<code class="language-javascript">' . $code . '</code>';
-    }
-
-    // 
 
     // Insérer dans la BD
     function insertMessage($message, $connexion){

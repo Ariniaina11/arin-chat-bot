@@ -28,8 +28,6 @@
     <title>Arin-bot</title>
     <link rel="shortcut icon" href="assets/images/arin-bot.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/styles/index.css">
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/themes/prism.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.25.0"></script> -->
     <link href="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/themes/prism.css" rel="stylesheet">
 </head>
 <body>
@@ -69,7 +67,7 @@
                 <div class="talk left">
                     <img src="assets/images/arin-bot.png" alt="arin-bot">
                     <p>
-                        <?=  formatText($msg['content']) ?>
+                        <?= Static_Method::formatText($msg['content']) ?>
                     </p>
                 </div>
 
@@ -110,8 +108,7 @@
                 <span style="--i:6;"></span>
                 <span style="--i:7;"></span>
                 <span style="--i:8;"></span>
-            </div>
-
+            </div> 
             
             <button class="submit-msg-btn" id="send-btn">
                 <img src="assets/images/send.png">
@@ -153,59 +150,11 @@
             document.body.removeChild(textarea);
     
             // Changer le texte sur le bouton
-            copy_btn.textContent = "Copied !!";
+            copy_btn.textContent = "Copied";
             
         }
     }
 </script>
-
-<!-- Fonctions -->
-<?php
-    // Formattage de texte (Pour le code source, commande Linux, ...)
-    function formatText($msg){
-        $formattedCode = formatCode($msg);
-        $formattedTerminal = formatTerminal($formattedCode);
-        
-        return $formattedTerminal;
-    }
-
-    // Pattern pour formatter les extraits du code
-    function formatCode($msg){
-        $pattern = '/```([a-zA-Z0-9_*]+)\s*([\s\S]+?)```/';
-        $formattedText = preg_replace_callback($pattern, 'replaceCodeSnippet', $msg);
-
-        return $formattedText;
-    }
-
-    // Pattern pour formatter les commandes Terminal
-    function formatTerminal($msg){
-        // Modèle 1
-        $pattern = '/`(\$ \s*([\s\S]+?))`/';
-        $formattedText = preg_replace_callback($pattern, 'replaceTerminalSnippet', $msg);
-
-        // Modèle 2
-        $pattern = '/```\s*([\s\S]+?)```/';
-        $formattedText = preg_replace_callback($pattern, 'replaceTerminalSnippet', $formattedText);
-
-        return $formattedText;
-    }
-
-    // ====================================== CALLBACKS ======================================
-
-    // Fonction Callback pour le remplacement du code
-    function replaceCodeSnippet($matches) {
-        $code = htmlspecialchars($matches[2]); // Convertir des caractères spéciaux en entités HTML
-        return '<button type="submit" class="copy" onclick="copyCode(this)">Copy</button>' .
-                '<code class="language-javascript">' . $code . '</code>';
-    }
-
-    // Fonction Callback pour le remplacement des commandes sur Terminal
-    function replaceTerminalSnippet($matches) {
-        $code = htmlspecialchars($matches[1]); // Convertir des caractères spéciaux en entités HTML
-        return '<button type="submit" class="copy" onclick="copyCode(this)">Copy</button>' .
-                '<code class="language-javascript">' . $code . '</code>';
-    }
-?>
 
 </body>
 </html>
