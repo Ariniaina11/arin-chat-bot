@@ -93,7 +93,7 @@
             <!-- Message de l'utilisateur -->
             <?php else: ?>
                 <div class="talk right" style="justify-content: flex-end;">
-                    <p><?= $msg['content'] ?></p>
+                    <p><?= htmlspecialchars($msg['content']) ?></p>
                     <img src="assets/images/user.png"  alt="user">
                 </div>
             <?php endif; ?>
