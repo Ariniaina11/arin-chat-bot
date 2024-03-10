@@ -5,7 +5,7 @@
     if(!isset($_SESSION['user_connected']))
         header('location:login.php');
 
-    // $_SESSION['user_connected'] = 27;
+    // $_SESSION['user_connected'] = 31;
 
     // Préparer la requête
     $stmt = $connexion->prepare('SELECT * FROM messages WHERE user_id = ? OR receiver_id = ?');
@@ -39,7 +39,26 @@
     <button id="no-btn">No</button>
     <button id="yes-btn">Yes</button>
 </div>
-   
+
+<!-- Popup - Infos -->
+<div id="popup-infos">
+    <h1>INFOS</h1>
+    <br>
+    <p>
+        This is an application that utilizes the OpenAI API to provide conversational interactions. 
+        It uses natural language processing to understand user input and generate relevant responses.<br><br>
+        <a target="_blank" href="https://github.com/PawanOsman/ChatGPT">Click here</a> for more informations.
+    </p>
+    <button id="ok-btn">OK</button>
+</div>
+
+<!-- Error - popup -->
+<div id="popup-error">
+    <h1 id="popup-error-text">Error message</h1>
+    <br>
+    <button id="ok-error-btn">OK</button>
+</div>
+
 <div class="chat-global">
     <div class="nav-top">
         <div class="location" id="logout">

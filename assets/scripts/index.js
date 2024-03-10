@@ -31,7 +31,7 @@ $(document).ready(function(){
             dataType: 'json',
             data : data,
             success : function(result){
-                if(result != ''){
+                if(result.response != ''){
                     // La réponse du bot
                     value = '<div class="talk left">' +
                                 '<img src="assets/images/arin-bot.png">' +
@@ -54,13 +54,12 @@ $(document).ready(function(){
                 }
                 else{
                     responseReceived();
-                    alert('Erreur de serveur !')
+                    openPopupError("Erreur de serveur !")
                 }
             },
             error : function(result) {
                 responseReceived();
-                alert('Une érreur s\'est produite : ' + result['statusText']);
-                console.log(result);
+                openPopupError('Une érreur s\'est produite : ' + result['statusText']);
             }
         });
     });
@@ -144,12 +143,7 @@ $(document).ready(function(){
 
     // Clique sur 'No'
     no_btn.on('click', function () {
-        chat_global.fadeTo(400, 1);
         closePopup();
-    })
-
-    chat_global.on('click', function(){
-        // alert('chat !');
     })
 
     // Afficher le popup
@@ -160,7 +154,54 @@ $(document).ready(function(){
       
     // Fermer le popup
     function closePopup() {
+        chat_global.fadeTo(400, 1);
         popup.hide();
     }
 
+    // ================================= API - CHOICE =================================
+    let apiBtn = $('.api-choice');
+    let popup_infos = $('#popup-infos');
+    let okBtn = $('#ok-btn');
+
+    apiBtn.on('click', function(){
+        openPopupInfos()
+    })
+
+    okBtn.on('click', function(){
+        closePopupInfos();
+    })
+
+     // Afficher le popup-infos
+     function openPopupInfos() {
+        chat_global.fadeTo(400, 0.3);
+        popup_infos.show();
+    }
+      
+    // Fermer le popup-infos
+    function closePopupInfos() {
+        chat_global.fadeTo(400, 1);
+        popup_infos.hide();
+    }
+
+    // ================================= ERROR - POPUP =================================
+    let popup_error = $('#popup-error');
+    let popup_error_text = $('#popup-error-text');
+    let okErrBtn = $('#ok-error-btn');
+
+    okErrBtn.on('click', function(){
+        closePopupError();
+    })
+
+     // Afficher le popup-error
+     function openPopupError(errText) {
+        chat_global.fadeTo(400, 0.3)
+        popup_error_text.text(errText)
+        popup_error.show()
+    }
+      
+    // Fermer le popup-error
+    function closePopupError() {
+        chat_global.fadeTo(400, 1)
+        popup_error.hide()
+    }
 });

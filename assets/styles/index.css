@@ -73,6 +73,7 @@ body {
 .api-choice img{
     width: 60px;
     padding: 5px 10px;
+    cursor: pointer;
 }
 
 
@@ -239,29 +240,37 @@ body {
 }
 
 /* POPUP */
-#popup {
+#popup, #popup-infos, #popup-error {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 320px;
-    height: 150px;
+    height: auto;
     background-color: #b3b2b2;
     border-radius: 10px;
-    box-shadow: 0 10px 50px 0px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 50px 0px rgba(12, 10, 10, 0.2);
     text-align: center;
-    padding: 10px;
-    padding-top: 3%;
+    padding: 2%;
     z-index: 1000;
     display: none;
 }
 
-#popup h1{
+#popup-infos {
+    width: 50%;
+    top: 40%;
+}
+
+#popup-error{
+    top: 40%;
+}
+
+#popup h1, #popup-infos h1, #popup-error h1{
     font-size: 20px;
     color: #585858;
 }
 
-#popup button{
+#popup button, #popup-infos button, #popup-error button{
     font-size: 18px;
     padding: 5px 15px;
     cursor: pointer;
@@ -270,11 +279,15 @@ body {
     border-radius: 5px;
 }
 
-#no-btn{
+#no-btn, #ok-btn, #ok-error-btn{
     background-color: #748497;
 }
 
-#no-btn:hover{
+#ok-btn, #ok-error-btn{
+    margin-top: 2%;
+}
+
+#no-btn:hover, #ok-btn:hover, #ok-error-btn:hover{
     transition: .2s;
     background-color: #808d9c;
 }
