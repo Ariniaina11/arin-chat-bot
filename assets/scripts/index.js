@@ -15,7 +15,7 @@ $(document).ready(function(){
 
         // Message de l'utilisateur
         let value = '<div class="talk right" style="justify-content: flex-end;">' +
-                        '<p>' + msg.val() + '</p>' +
+                        '<p>' + htmlEntities(msg.val()) + '</p>' +
                         '<img src="assets/images/user.png">' +
                     '</div>';
 
@@ -107,6 +107,11 @@ $(document).ready(function(){
         let div = $('#conversation');
 
         div.scrollTop(div.prop("scrollHeight"));
+    }
+
+    // Pour formatter le texte de l'utilisateur
+    function htmlEntities(str) {
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
     }
 
     // ====================================== LOGOUT ======================================
